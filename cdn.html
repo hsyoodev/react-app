@@ -12,13 +12,13 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
       const root = document.querySelector('#root');
-      const Header = (
+      const Header = () => (
         <header>
           <h1>WEB</h1>World Wide Web!
         </header>
       );
-      const container = React.createElement('div', null, [Header]);
-      ReactDOM.render(container, root);
+      const Container = () => <Header />;
+      ReactDOM.render(<Container />, root);
     </script>
   </body>
 </html>
