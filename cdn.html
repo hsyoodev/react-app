@@ -9,22 +9,15 @@
     <div id="root"></div>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
       const root = document.querySelector('#root');
-      const h1 = React.createElement(
-        'h1',
-        {
-          onClick: (e) => {
-            alert(e.target.textContent);
-          },
-        },
-        'WEB'
+      const Header = (
+        <header>
+          <h1>WEB</h1>World Wide Web!
+        </header>
       );
-      const header = React.createElement('header', null, [
-        h1,
-        'World Wide Web!',
-      ]);
-      const container = React.createElement('div', null, [header]);
+      const container = React.createElement('div', null, [Header]);
       ReactDOM.render(container, root);
     </script>
   </body>
