@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>연습</title>
   </head>
   <body>
     <div id="root"></div>
@@ -14,10 +14,20 @@
       const root = document.querySelector('#root');
       const Header = () => (
         <header>
-          <h1>WEB</h1>World Wide Web!
+          <h1>이 책의 이름은 처음 만난 리택트입니다.</h1>
         </header>
       );
-      const Container = () => <Header />;
+      const Section = () => (
+        <section>
+          <h2>이 책은 총 500페이지로 이뤄져 있습니다.</h2>
+        </section>
+      );
+      const Container = () => (
+        <div>
+          <Header />
+          <Section />
+        </div>
+      );
       ReactDOM.render(<Container />, root);
     </script>
   </body>
