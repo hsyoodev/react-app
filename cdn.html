@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script>
+      const root = document.querySelector('#root');
+      const h1 = React.createElement(
+        'h1',
+        {
+          onClick: (e) => {
+            alert(e.target.textContent);
+          },
+        },
+        'WEB'
+      );
+      const header = React.createElement('header', null, [
+        h1,
+        'World Wide Web!',
+      ]);
+      const container = React.createElement('div', null, [header]);
+      ReactDOM.render(container, root);
+    </script>
+  </body>
+</html>
