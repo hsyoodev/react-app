@@ -12,23 +12,19 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
       const root = document.querySelector('#root');
-      const Header = () => (
-        <header>
-          <h1>이 책의 이름은 처음 만난 리택트입니다.</h1>
-        </header>
-      );
-      const Section = () => (
-        <section>
-          <h2>이 책은 총 500페이지로 이뤄져 있습니다.</h2>
-        </section>
-      );
-      const Container = () => (
-        <div>
-          <Header />
-          <Section />
-        </div>
-      );
-      ReactDOM.render(<Container />, root);
+      function Tick() {
+        console.log('run');
+        const element = (
+          <div>
+            <h1>안녕, 리액트!</h1>
+            <h2>현재 시각: {new Date().toLocaleTimeString()}</h2>
+          </div>
+        );
+        return element;
+      }
+      setInterval(() => {
+        ReactDOM.render(<Tick />, root);
+      }, 1000);
     </script>
   </body>
 </html>
