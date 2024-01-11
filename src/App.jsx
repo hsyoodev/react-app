@@ -1,10 +1,10 @@
+import styles from './App.module.css';
+
 function Comment(props) {
   return (
     <div className="comment">
       <UserInfo author={props.author} />
-      <div className="comment-text" style={{ fontSize: '2rem' }}>
-        {props.text}
-      </div>
+      <div className={styles.fontSize}>{props.text}</div>
       <div className="comment-date">{props.date}</div>
     </div>
   );
