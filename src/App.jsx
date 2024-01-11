@@ -1,15 +1,11 @@
-import Header from './components/Header';
-import Section from './components/Section';
-import Article from './components/Article';
-import Footer from './components/Footer';
+import Nav from './components/Nav';
 
 function App() {
+  const list = ['HTML', 'CSS', 'JavaScript'];
+
   return (
     <div>
-      <Header />
-      <Section />
-      <Article />
-      <Footer />
+      <Nav list={list} />
     </div>
   );
 }
