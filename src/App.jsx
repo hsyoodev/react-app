@@ -1,37 +1,40 @@
-import './App.css';
-
-function Header() {
+function Comment(props) {
   return (
-    <header>
-      <h1>WEB</h1>
-      World Wide Web!
-    </header>
+    <div className="comment">
+      <UserInfo author={props.author} />
+      <div className="comment-text">{props.text}</div>
+      <div className="comment-date">{props.date}</div>
+    </div>
   );
 }
 
-function Nav() {
+function Avatar(props) {
   return (
-    <nav>
-      <ul>
-        <li>
-          <a href="1.html">HTML</a>
-        </li>
-        <li>
-          <a href="2.html">CSS</a>
-        </li>
-        <li>
-          <a href="3.html">JavaScript</a>
-        </li>
-      </ul>
-    </nav>
+    <img
+      className="avatar"
+      src={props.author.avatarUrl}
+      alt={props.author.name}
+    />
+  );
+}
+
+function UserInfo(props) {
+  return (
+    <div className="user-info">
+      <Avatar author={props.author} />
+      <div className="user-info-name">{props.author.name}</div>
+    </div>
   );
 }
 
 function App() {
+  const author = {
+    name: 'name',
+    avatarUrl: 'http://ggoreb.com/images/img_avatar1.png',
+  };
   return (
-    <div className="App">
-      <Header />
-      <Nav />
+    <div>
+      <Comment author={author} text="text" date={new Date().toString()} />
     </div>
   );
 }
