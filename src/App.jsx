@@ -1,9 +1,16 @@
-import NotificationList from './components/NotificationList';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Read from './pages/Read';
+import Adsform from './pages/Adsform';
 
 function App() {
   return (
     <>
-      <NotificationList />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/read" element={<Read />} />
+          <Route path="/adsform" element={<Adsform />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
