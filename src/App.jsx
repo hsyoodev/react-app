@@ -1,42 +1,30 @@
 import { useState, useMemo, useRef } from 'react';
 
-function Counter() {
-  let value = useRef(0);
-  const [count, setCount] = useState(0);
-
-  const onClick = () => {
-    value.current++;
-    console.log(`value: ${value.current}`);
-    setCount(count + 1);
-  };
-  const factorial = (n) => {
-    if (n == 0) {
-      return 0;
-    } else if (n == 1) {
-      return 1;
-    } else {
-      return factorial(n - 1) * n;
-    }
-  };
-  const memo = useMemo(() => {
-    console.log('factorial 연산');
-    let result = factorial(count);
-    return result;
-  }, [count]);
-
-  return (
-    <div>
-      <h1>{count}</h1>
-      <h1>팩토리얼 연산 결과: {memo}</h1>
-      <button onClick={onClick}>Click</button>
-    </div>
-  );
+import { Component } from 'react';
+class Toggle extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { isToggleOn: true };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    this.setState({
+      isToggleOn: !this.state.isToggleOn,
+    });
+  }
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        {this.state.isToggleOn ? '켜짐' : '꺼짐'}
+      </button>
+    );
+  }
 }
 
 function App() {
   return (
     <div>
-      <Counter />
+      <Toggle />
     </div>
   );
 }
