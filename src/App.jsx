@@ -1,23 +1,13 @@
 import { useState, useMemo, useRef } from 'react';
 
-import { Component } from 'react';
-class Toggle extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { isToggleOn: true };
+function Toggle(props) {
+  const [isToggleOn, setIsToggleOn] = useState(true);
+
+  function handleClick() {
+    setIsToggleOn(!isToggleOn);
   }
-  handleClick = () => {
-    this.setState({
-      isToggleOn: !this.state.isToggleOn,
-    });
-  };
-  render() {
-    return (
-      <button onClick={this.handleClick}>
-        {this.state.isToggleOn ? '켜짐' : '꺼짐'}
-      </button>
-    );
-  }
+
+  return <button onClick={handleClick}>{isToggleOn ? '켜짐' : '꺼짐'}</button>;
 }
 
 function App() {
@@ -27,4 +17,5 @@ function App() {
     </div>
   );
 }
+
 export default App;
