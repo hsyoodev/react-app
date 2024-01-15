@@ -7,7 +7,11 @@ function Toggle(props) {
     setIsToggleOn(!isToggleOn);
   }
 
-  return <button onClick={handleClick}>{isToggleOn ? '켜짐' : '꺼짐'}</button>;
+  return (
+    <button onClick={(e) => handleClick(e)}>
+      {isToggleOn ? '켜짐' : '꺼짐'}
+    </button>
+  );
 }
 
 function App() {
