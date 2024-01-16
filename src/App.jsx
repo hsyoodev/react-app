@@ -1,21 +1,11 @@
-function MailBox(props) {
-  const unreadMessages = props.unreadMessages;
-  return (
-    <div>
-      <h1>안녕하세요!</h1>
-      {unreadMessages.length > 0 && (
-        <h2>현재 {unreadMessages.length}개의 읽지 않은 메시지가 있습니다.</h2>
-      )}
-    </div>
-  );
-}
-
 function App() {
-  const unreadMessages = ['msg1', 'msg2'];
+  const numbers = [1, 2, 3, 4, 5];
   return (
-    <>
-      <MailBox unreadMessages={unreadMessages} />
-    </>
+    <ul>
+      {numbers.map((v, i) => (
+        <li key={i}>{v}</li>
+      ))}
+    </ul>
   );
 }
 
