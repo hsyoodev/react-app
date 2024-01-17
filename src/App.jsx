@@ -1,36 +1,41 @@
 import { useEffect, useState } from 'react';
-import Threats from './components/Threats';
+import Area from './components/Area';
+import Clock from './components/Clock';
+import Weather from './components/Weather';
 
 function App() {
-  const [threatsList, setThreatsList] = useState([]);
+  const [area, setArea] = useState({});
+  const [weather, setWeather] = useState({});
+
   useEffect(() => {
-    async function get() {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      get(lat, lon);
+    });
+
+    async function get(lat, lon) {
       const data = await fetch(
-        'https://api.terrorless.01ab.net/trpc/threat.list?batch=1&input=%7B%220%22%3A%7B%22json%22%3Anull%2C%22meta%22%3A%7B%22values%22%3A%5B%22undefined%22%5D%7D%7D%7D'
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=6edee3c2aa182bc44d18ccb204c98a31`
       );
       const res = await data.json();
-      const obj = res[0]; // 하드코딩.. 위험..
-      const result = obj.result;
-      const data2 = result.data;
-      const json = data2.json;
-      const threats = json.threats;
-      const threatsList = [];
-      threats.forEach((v) => {
-        const locationName = v.locationName;
-        const description = v.description;
-        const id = v.id;
-        threatsList.push({ id, locationName, description });
-      });
-      setThreatsList(threatsList);
+      const name = res.name;
+      setArea({ name, lat, lon });
+
+      const icon = `http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png`;
+      const temp = res.main.temp;
+      const speed = res.wind.speed;
+      const main = res.weather[0].main;
+      setWeather({ icon, temp, speed, main });
     }
-    get();
   }, []);
 
   return (
     <>
-      {threatsList.map((v, i) => (
-        <Threats key={i} data={v} />
-      ))}
+      <Clock />
+      <Area data={area} />
+      <Weather data={weather} />
     </>
   );
 }
