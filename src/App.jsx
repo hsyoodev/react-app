@@ -1,54 +1,44 @@
-import './App.css';
-import TodoTemplate from './components/TodoTemplate';
-import TodoInsert from './components/TodoInsert';
-import TodoList from './components/TodoList';
-import { useState, useRef, useCallback } from 'react';
+import React, { useState } from 'react';
+import ThemeContext from './ThemeContext';
+import UserContext from './UserContext';
 
-function App() {
-  const [todos, setTodos] = useState([
-    { id: 1, text: '리액트의 기초 알아보기', checked: true },
-    { id: 2, text: '컴포넌트 스타일링해 보기', checked: true },
-    { id: 3, text: '일정 관리 앱 만들어 보기', checked: false },
-  ]);
-  const nextId = useRef(todos.length + 1);
-  const onInsert = useCallback(
-    (text) => {
-      const todo = {
-        id: nextId.current,
-        text,
-        checked: false,
-      };
-      setTodos(todos.concat(todo));
-      nextId.current += 1;
-    },
-    [todos]
-  );
-  const onRemove = useCallback(
-    (id) => {
-      setTodos(todos.filter((todo) => todo.id !== id));
-    },
-    [todos]
-  );
-  const onToggle = useCallback(
-    (id) => {
-      setTodos(
-        todos.map((todo) =>
-          todo.id === id ? { ...todo, checked: !todo.checked } : todo
-        )
-      );
-    },
-    [todos]
-  );
-
+function A() {
+  return <B />;
+}
+function B() {
+  return <C />;
+}
+function C() {
   return (
-    <TodoTemplate>
-      <TodoInsert onInsert={onInsert}></TodoInsert>
-      <TodoList
-        todos={todos}
-        onRemove={onRemove}
-        onToggle={onToggle}
-      ></TodoList>
-    </TodoTemplate>
+    <ThemeContext.Consumer>
+      {(color) => (
+        <UserContext.Consumer>
+          {(user) => (
+            <div>
+              <h3>{user.name}</h3>
+              <h1 style={{ backgroundColor: color }}>C 내용</h1>
+            </div>
+          )}
+        </UserContext.Consumer>
+      )}
+    </ThemeContext.Consumer>
+  );
+}
+function App() {
+  const [color, setColor] = useState('gray');
+  const [user, setUser] = useState({ name: 'Guest' });
+  const handleClick = (value) => setColor(value);
+  return (
+    <div>
+      <button onClick={() => handleClick('red')}>Red</button>
+      <button onClick={() => handleClick('blue')}>Blue</button>
+      <br />
+      <ThemeContext.Provider value={color}>
+        <UserContext.Provider value={user}>
+          <A />
+        </UserContext.Provider>
+      </ThemeContext.Provider>
+    </div>
   );
 }
 
