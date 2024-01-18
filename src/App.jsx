@@ -1,79 +1,44 @@
-import styled from 'styled-components';
+import { BrowserRouter, Link, Route, Routes, NavLink } from 'react-router-dom';
 
-const Button = styled.button`
-  color: ${(props) => (props.black ? 'white' : 'black')};
-  background: ${(props) => (props.black ? 'black' : 'white')};
-  border: 1px solid black;
-`;
-const RoundedButton = styled(Button)`
-  border-radius: 16px;
-`;
-const Wrapper = styled.div`
-  padding: 1rem;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  background-color: lightgrey;
-`;
-const Block = styled.div`
-  padding: ${(props) => props.padding};
-  border: 1px solid black;
-  border-radius: 1rem;
-  background-color: ${(props) => props.bg};
-  color: white;
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: center;
-`;
-const blockItems = [
-  {
-    label: 1,
-    padding: '1rem',
-    backgroundColor: 'red',
-  },
-  {
-    label: 2,
-    padding: '3rem',
-    backgroundColor: 'green',
-  },
-  {
-    label: 3,
-    padding: '2rem',
-    backgroundColor: 'blue',
-  },
-];
-
-function Blocks(props) {
-  return (
-    <Wrapper>
-      {blockItems.map((blockItem, i) => {
-        return (
-          <Block
-            padding={blockItem.padding}
-            bg={blockItem.backgroundColor}
-            key={i}
-          >
-            {blockItem.label}
-          </Block>
-        );
-      })}
-    </Wrapper>
-  );
+function Component1() {
+  return <div>1 번 화면</div>;
 }
-
+function Component2() {
+  return <div>2 번 화면</div>;
+}
+function Component3() {
+  return <div>3 번 화면</div>;
+}
 function App() {
   return (
-    <div>
-      <Button>Normal</Button>
-      <Button black>Dark</Button>
-      <RoundedButton>Rounded</RoundedButton>
-      <Wrapper>
-        <Block padding="20px" bg="green">
-          Test
-        </Block>
-      </Wrapper>
-    </div>
+    <BrowserRouter>
+      <div>
+        <h1>React Router DOM</h1>
+        <h2>Link</h2>
+        {/* a 태그에 class 가 안 붙는다. */}
+        {/* <Link to="/1">1번으로 이동</Link> /&nbsp;
+        <Link to="/2">2번으로 이동</Link> /&nbsp;
+        <Link to="/3">3번으로 이동</Link> */}
+        <h2>NavLink</h2>
+        {/* a 태그에 class 가 붙는다 */}
+        <NavLink to="/1">1번으로 이동</NavLink> /&nbsp;
+        <NavLink to="/2">2번으로 이동</NavLink> /&nbsp;
+        <NavLink to="/3">3번으로 이동</NavLink>
+        <Routes>
+          <Route path="/1" element={<Component1 />} />
+          <Route path="/2" element={<Component2 />} />
+          <Route path="/3" element={<Component3 />} />
+        </Routes>
+        <footer
+          style={{
+            marginTop: '50px',
+            background: 'lightblue',
+          }}
+        >
+          꼬리말
+        </footer>
+      </div>
+    </BrowserRouter>
   );
 }
 
